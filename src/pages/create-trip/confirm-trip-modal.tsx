@@ -5,11 +5,17 @@ import { Button } from "../../components/button";
 interface ConfirmTripModalProps {
   closeConfirmTripModal: () => void
   createTrip: (event: FormEvent<HTMLFormElement>) => void
+  setOwnerName: (name: string) => void
+  setOwnerEmail: (email: string) => void
+  destination: (string)
 }
 
 export function ConfirmTripModal({
   closeConfirmTripModal,
-  createTrip
+  createTrip,
+  setOwnerName,
+  setOwnerEmail,
+  destination
 }: ConfirmTripModalProps) {
   return (
     <div className="fixed inset-0 bg-black/60 flex items-center justify-center">
@@ -22,7 +28,7 @@ export function ConfirmTripModal({
                 </button>
               </div>
               <p className="text-sm text-zinc-400">
-                Para concluir a criação da viagem para <span className="text-zinc-100 font-semibold" >Florianópolis, Brasil</span> nas datas <span className="text-zinc-100 font-semibold" >16 a 27 de Agosto de 2024</span> preencha seus dados abaixo:.
+                Para concluir a criação da viagem para <span className="text-zinc-100 font-semibold" >{destination}</span> nas datas <span className="text-zinc-100 font-semibold" >16 a 27 de Agosto de 2024</span> preencha seus dados abaixo:.
               </p>
             </div>
 
@@ -33,6 +39,7 @@ export function ConfirmTripModal({
                   name="name" 
                   placeholder="Seu nome completo" 
                   className="bg-transparent text-lg placeholder-zinc-400 outline-none flex-1"
+                  onChange={event => setOwnerName(event.target.value)}
                 />
               </div>
               <div className="h-14 px-4 bg-zinc-950 border border-zinc-800 rounded-lg flex items-center gap-2">
@@ -42,6 +49,7 @@ export function ConfirmTripModal({
                   name="email" 
                   placeholder="Seu e-mail pessoal" 
                   className="bg-transparent text-lg placeholder-zinc-400 outline-none flex-1"
+                  onChange={event => setOwnerEmail(event.target.value)}
                 />
               </div>
               <Button type="submit" size="full">
